@@ -11,20 +11,56 @@
     .raise{
         margin-top: 100px;
     }
+    .popup{
+        display: none;
+    }
 </style>
 <script>
-    var username = "username";
-    var password = "password";
+    var username = ["username", "user", "uname", "u", null, "",];
+    var password = ["password", "pwd", "pass", "pword", "pswrd", null, ""];
+    var usernameVal = document.getElementById("username");
+    var passwordVal = document.getElementById("password");
 
     function login() {
-        console.log("Entered click if statement.");
-        if (username === $("#username").val() && password === $("#password").val()) {
-            console.log("entered credentials if statement.");
-            location.href = "success.html";
-        } else {
-            $(".alert").show("1000").hide("7000");
+        for (i = 0; i > username.length; i++){
+            console.log("Entered click if statement.");
+            if (username[i] === usernameVal && password[p] === passwordVal) {
+                console.log("entered credentials if statement.");
+                location.href = "success.html";
+            } else {
+                $(".alert").show(1000);
+            }
         }
     }
+
+    $("#submit").click(function(){
+       var errors = validateForm();
+        if(errors !== null){
+            $("#list").html(errors);
+        }
+    });
+
+    function validateForm(){
+        var username = $('#username').val(),
+            password = $('#password').val(),
+            errors = "";
+
+        if (username === ""){
+            errors += '<li>Please select a title</li>';
+        }
+        if (password === ""){
+            errors += '<li>Please enter your first name</li>';
+        }
+        return errors;
+    }
+
+    function accessibilityLrg(){
+        $("body").css({ "font-size": "25px" });
+    }
+    function accessibilitySml(){
+        $("body").css({ "font-size": "15px" });
+    }
+
 
 </script>
     <nav class="navbar navbar-default">
@@ -39,27 +75,37 @@
         <div class="form-horizontal">
             <div class="alert alert-warning" style="display: none">
                 <strong>Warning!</strong> You have entered incorrect credentials.
+                <ul id="list"></ul>
             </div>
 
 
-            <div class="form-group">
+            <div class="form-group col-md-12">
                 <label for="username" class="control-label col-md-2">Username:</label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="username" placeholder="joe0bloggs" id="username" />
+                    <input type="text" class="form-control" name="username" placeholder="joe0bloggs" id="username"/>
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-12">
                 <label for="password" class="control-label col-md-2">Password</label>
                 <div class="col-md-10">
-                    <input type="password" class="form-control" name="password" placeholder="******" id="password">
+                    <input type="password" class="form-control" name="password" placeholder="******" id="password"/>
                 </div>
             </div>
 
             <div class="form-group col-md-12">
                 <button class="btn btn-primary pull-right" id="submit" value="Login" onclick="login()">Login</button>
-                <a class="pull-left" href="#">Forgot Password?</a>
+                <a class="pull-right" href="#">Forgot Password?</a>
             </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form-group col-md-12">
+            <button class="btn btn-default pull-right" onclick="accessibilityLrg()">Enlarge Text</button>
+        </div>
+        <div class="form-group col-md-12">
+            <button class="btn btn-default pull-right" onclick="accessibilitySml()">Decrease Text</button>
         </div>
     </div>
 
